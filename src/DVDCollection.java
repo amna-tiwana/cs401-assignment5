@@ -43,6 +43,10 @@ public class DVDCollection {
 		}
 		return dvdString;
 	}
+	
+	public DVD[] getDVDArray() {
+		return dvdArray;
+	}
 
 	public void addOrModifyDVD(String title, String rating, String runningTime) {
 		// NOTE: Be careful. Running time is a string here
@@ -67,18 +71,18 @@ public class DVDCollection {
 			dvdArray[index].setTitle(title);
 			dvdArray[index].setRating(rating);
 			dvdArray[index].setRunningTime(runTime);
-			System.out.println("found duplicate at index " + index);
+			//System.out.println("found duplicate at index " + index);
 		}
 		else { //dvd not in collection, add it
 			if(numdvds < dvdArray.length) {
 				dvdArray[numdvds] = new DVD(title, rating, runTime);
-				System.out.println("[" + numdvds + "]" + dvdArray[numdvds].toString());
+				//System.out.println("[" + numdvds + "]" + dvdArray[numdvds].toString());
 				numdvds++;
 				Arrays.sort(dvdArray, 0, numdvds, new DVDTitleSort());
 			}
 			else {
 				//todo double array size and try again
-				System.out.println("need to increase array size first");
+				//System.out.println("need to increase array size first");
 				doubleDVDArraySize();
 				System.out.println(toString());
 				//addOrModifyDVD(title, rating, runningTime);
@@ -101,7 +105,7 @@ public class DVDCollection {
 		}
 		else {
 			//todo throw exception
-			System.out.println("DVD not found");
+			//System.out.println("DVD not found");
 		}
 	}
 	
@@ -138,7 +142,7 @@ public class DVDCollection {
 		  while ((line = bis.readLine()) != null) {
 			  String[] values = line.split(",");
 			  if(values.length != 3) {
-				  System.out.println("Error: Invalid DVD entry in file \"" + line + "\"");
+				  //System.out.println("Error: Invalid DVD entry in file \"" + line + "\"");
 				  return;
 			  }
 			  addOrModifyDVD(values[0], values[1], values[2]);
@@ -147,14 +151,14 @@ public class DVDCollection {
 		  sourceName = filename;
 		} 
 		catch (Exception e) {
-			System.out.println("File not found. Starting new collection.");
+			//System.out.println("File not found. Starting new collection.");
 		}
 	}
 	
 	public void save() {
 		try {
 			if(!modified) {
-				System.out.println("Notice: No changes to save. File not modified.");
+				//System.out.println("Notice: No changes to save. File not modified.");
 				return;
 			}
 			
@@ -167,11 +171,11 @@ public class DVDCollection {
 			}
 			
 			fw.close();
-			System.out.println("Notice: Changes to " + sourceName + " saved successfully.");
+			//System.out.println("Notice: Changes to " + sourceName + " saved successfully.");
 			modified = false;
 		} 
 		catch (IOException e) {
-			System.err.println("Error saving file: " + e);
+			//System.err.println("Error saving file: " + e);
 		}
 	}
 
@@ -194,7 +198,7 @@ public class DVDCollection {
 		if(rating.equals("NC-17") || rating.equals("R") || rating.equals("PG-13") || rating.equals("PG") || rating.equals("G"))
 			return true;
 		//todo throw exception?
-		System.out.println("invalid movie rating");
+		//System.out.println("invalid movie rating");
 		return false;
 	}
 	
@@ -210,7 +214,7 @@ public class DVDCollection {
 		}
 		catch(NumberFormatException e) {
 			//todo throw exception?
-			System.out.println("invalid runtime");
+			//System.out.println("invalid runtime");
 		}
 		return runTime;
 	}
@@ -220,7 +224,7 @@ public class DVDCollection {
 	 * @param title - DVD title
 	 * @return int index
 	 */
-	private int findDVD(String title ) {
+	public int findDVD(String title ) {
 		if(numdvds > 0) {
 			for(int i = 0; i < numdvds; i++) {
 				if(dvdArray[i].getTitle().equals(title))
