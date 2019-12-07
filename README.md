@@ -1,5 +1,5 @@
 # DVD Manager GUI in Java Swing
-### CSUEB CS-401 Software Development SP2019
+CSUEB CS-401 Software Development SP2019
 
 ### Screenshots
 ![GitHub Project Screenshot](screenshots/gui.png)
